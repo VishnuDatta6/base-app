@@ -1,0 +1,107 @@
+$primary: #605BFF;
+
+.sign-in {
+    background: linear-gradient(100deg, $primary 0%, $primary 45%, white 45%, white 100%);
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+}
+
+header>span{
+    display: none;
+}
+
+.logo {
+    width: 80.5px;
+    margin: 25px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+}
+
+.firstsec {
+    text-align: center;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 88px;
+    letter-spacing: 0em;
+}
+
+.secondsec>form{
+    margin: auto;
+    width: 40%;
+}
+
+.secondsec>form>h1{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+}
+
+.secondsec>form>h3, .form-style {
+    font-family: 'Lato', sans-serif;
+}
+
+.ext-icons {
+    display: flex;
+    width: 50%;
+    padding: 0 10%;
+    gap: 10%;
+}
+
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 767px) {
+   .sign-in {
+    background: unset;
+   }
+
+   header{
+    display: flex;
+    background-color: $primary;
+    height: 80px;
+    align-items: center;
+   }
+
+   header>span{
+    text-align: left;
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+   }
+
+   .logo {
+    width: 26px;
+    margin: 13px 10px 13px 20px;
+   }
+   
+   main {
+    display: block;
+    height: unset;
+   }
+    
+  .firstsec {
+    display: none;
+  }
+
+  .secondsec>form {
+    width: 100%;
+    padding: 5%;
+  }
+
+  .ext-icons{
+    width: 60%;
+    margin: auto;
+    justify-content: space-around;
+  }
+
+  .ext-icons>svg>path{
+    fill: gray !important;
+  }
+}
