@@ -2,6 +2,10 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    fontFamily : {
+      'nunito' : ['Nunito', 'sans-serif'],
+      'figtree' : ['Figtree', 'sans-serif']
+    },
     extend: {
       colors : {
         'primary' : '#605bff',

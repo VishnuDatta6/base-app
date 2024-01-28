@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import excelIcon from "../assets/excel-icon.svg";
 import uploadIcon from "../assets/upload-icon.svg";
 import * as XLSX from "xlsx";
@@ -52,7 +52,16 @@ const Upload = () => {
           const worksheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[worksheetName];
           const res = XLSX.utils.sheet_to_json(worksheet);
-          setData(res);
+          if(res.length>0){
+            if(Object.keys(res[0]).join("") === "idlinksprefixselect tagsselected tags"){
+              setData(res);
+            }else{
+              alert("File schema is not matched");
+            }
+          }else {
+            alert("Uploaded file is empty");
+          }
+          
         };
       }
       if (selectedFile.type === "text/csv") {
@@ -60,7 +69,16 @@ const Upload = () => {
           header: true,
           skipEmptyLines: true,
           complete: function (result) {
-            setData(result.data);
+            const res = result?.data
+            if(result?.data.length > 0){
+              if(Object.keys(res[0]).join("") === "idlinksprefixselect tagsselected tags"){
+                setData(result.data);
+              }else{
+                alert("File schema is not matched");
+              }
+            }else {
+              alert("Uploaded file is empty");
+            }
           },
         });
       }
@@ -80,7 +98,7 @@ const Upload = () => {
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
-          className="sm:h-2/3 sm:w-1/2 h-96 shadow-xl sm:shadow-none w-96 border-dotted border-2 border-gray-200 flex flex-col flex-wrap gap-6 content-center justify-center m-auto"
+          className="sm:h-2/3 sm:w-1/2 h-96 shadow-xl sm:shadow-none w-96 border-dotted border-2 border-gray-200 rounded-2xl flex flex-col flex-wrap gap-6 content-center justify-center m-auto"
         >
           <img src={excelIcon} alt="excel icon" className="w-12 mx-auto" />
           <input
@@ -128,7 +146,7 @@ const Upload = () => {
           )}
         </div>
         <button
-          className={`sm:w-1/2 w-96 sm:h-24 h-14 flex flex-wrap content-center justify-center mx-auto my-6 bg-primary ${data.length ? 'opacity-40' : ''} font-semibold text-white border-none rounded-2xl`}
+          className={`sm:w-1/2 w-96 sm:h-24 h-14 flex flex-wrap content-center justify-center mx-auto my-6 bg-primary ${data?.length ? 'opacity-40' : ''} font-semibold text-white border-none rounded-2xl`}
           onClick={handleFileUpload}
           disabled={data?.length}
         >
@@ -144,10 +162,10 @@ const Upload = () => {
       </div>
       {data ? (
         <div className="">
-          <h2 className="sm:w-11/12 m-4 font-semibold text-base sm:text-5xl sm:mx-auto sm:my-10 ">
+          <h2 className="sm:w-11/12 mx-4 mt-14 mb-4 sm:m-4 font-semibold text-base sm:text-5xl sm:mx-auto sm:my-10 ">
             Uploads
           </h2>
-          <div className="w-screen overflow-x-scroll">
+          <div className="w-screen sm:w-11/12 sm:mx-auto overflow-x-scroll">
           <Table data={data} setData={setData} />
           </div>
         </div>

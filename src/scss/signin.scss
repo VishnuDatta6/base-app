@@ -34,17 +34,17 @@ main {
     letter-spacing: 0em;
 }
 
-.secondsec>form{
+.secondsec>#form{
     margin: auto;
     width: 40%;
 }
 
-.secondsec>form>h1{
+.secondsec>#form>h1{
     font-family: 'Montserrat', sans-serif;
     font-size: 36px;
 }
 
-.secondsec>form>h3, .form-style {
+.secondsec>#form>h3, .form-style {
     font-family: 'Lato', sans-serif;
 }
 
@@ -56,8 +56,8 @@ main {
 }
 
 @media only screen 
-and (min-device-width: 320px) 
-and (max-device-width: 767px) {
+and (min-device-width: 270px) 
+and (max-device-width: 1024px) {
    .sign-in {
     background: unset;
    }
@@ -90,7 +90,7 @@ and (max-device-width: 767px) {
     display: none;
   }
 
-  .secondsec>form {
+  .secondsec>#form {
     width: 100%;
     padding: 5%;
   }

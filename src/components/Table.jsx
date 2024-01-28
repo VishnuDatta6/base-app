@@ -1,4 +1,6 @@
 import React from "react";
+import "../scss/table.scss";
+import { storedTagList } from "../utils/utilities";
 
 const Table = ({ data, setData }) => {
   const tagcolumnList = data.map((item) => item["select tags"]);
@@ -16,7 +18,8 @@ const Table = ({ data, setData }) => {
     return res;
   };
 
-  const tagList = tagListBuilder(tagcolumnList);
+  const derivedTagList = tagListBuilder(tagcolumnList);
+  const tagList = derivedTagList.length ? derivedTagList : storedTagList
 
   const handleTagSelection = (id, value) => {
     setData((prevData) => {
@@ -62,14 +65,14 @@ const Table = ({ data, setData }) => {
   ];
 
   return (
-    <table className="sm:w-11/12 p-7 overflow-x-scroll bg-gray-150 text-left rounded-lg sm:m-auto border-separate border-spacing-y-6">
+    <table className="sm:w-full font-figtree p-3 sm:px-6 bg-gray-150 text-left rounded-2xl sm:m-auto border-separate border-spacing-y-6">
       <thead>
         <tr>
-          <th className="w-1/10 px-4 py-6">Sl No.</th>
-          <th className="w-1/5 px-4 py-6">Links</th>
-          <th className="w-1/5 px-4 py-6">Prefix</th>
-          <th className="w-1/5 px-4 py-6">Add Tags</th>
-          <th className="w-2/5 px-4 py-6">Selected Tags</th>
+          <th className="sm:w-1/10 px-4 py-2">Sl No.</th>
+          <th className="sm:w-1/5 px-4 py-2">Links</th>
+          <th className="sm:w-1/5 px-4 py-2">Prefix</th>
+          <th className="sm:w-1/5 px-4 py-2">Add Tags</th>
+          <th className="sm:w-2/5 px-4 py-2">Selected Tags</th>
         </tr>
       </thead>
       <tbody>
@@ -91,21 +94,21 @@ const Table = ({ data, setData }) => {
                   }}
                   className="rounded-lg border-gray-300"
                 >
-                  <option key="select tag" value="" disabled>
+                  <option key={0} value='' disabled>
                     Select Tags
                   </option>
-                  {tagList.map((item) => (
-                    <option key={item} value={item}>
+                  {tagList.map((item, index) => (
+                    <option  key={index+1} value={item}>
                       {item}
                     </option>
                   ))}
                 </select>
               </td>
               <td className="bg-white min-h-24 flex flex-wrap p-4 rounded-lg">
-                {item["selected tags"].split(",").map((tag) => {
+                {item["selected tags"]?.split(",").map((tag) => {
                   if (tag) {
                     return (
-                      <span className="bg-primary w-26 font-semibold flex items-center rounded-lg text-white gap-2 px-4 m-2 ">
+                      <span key={tag} className="bg-primary w-26 font-semibold flex items-center rounded-lg text-white gap-2 px-4 m-2 ">
                         {tag}
                         <button className="text-3xl" onClick={() => handleTagDeletion(item.id, tag)}>
                           &times;

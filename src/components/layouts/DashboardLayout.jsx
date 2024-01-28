@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import Header from "../Header";
+import Sidebar from "../Sidebar";
 import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="relative">
-      <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
+      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
       {isOpen && (
         <div
