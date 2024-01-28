@@ -7,14 +7,14 @@ import Upload from "./Upload";
 import { conText } from "./context/centralState";
 
 const Router = () => {
-  const {username} = useContext(conText);
+  const { username } = useContext(conText);
   return (
     <Routes>
       <Route
         path="/"
         element={username ? <DashboardLayout /> : <Navigate to="/login" />}
       >
-        <Route path="/" element={<Navigate to="/upload"/>} />
+        <Route path="/" element={<Navigate to="/upload" />} />
         <Route path="/upload" element={<Upload />} />
       </Route>
       <Route path="/" element={<MainLayout />}>

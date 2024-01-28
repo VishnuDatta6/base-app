@@ -98,7 +98,7 @@ const Upload = () => {
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
-          className="sm:h-2/3 sm:w-1/2 h-96 shadow-xl sm:shadow-none w-96 border-dotted border-2 border-gray-200 rounded-2xl flex flex-col flex-wrap gap-6 content-center justify-center m-auto"
+          className="sm:h-2/3 sm:w-1/2 shadow-xl sm:shadow-none w-4/5 aspect-square border-dotted border-2 border-gray-200 rounded-2xl flex flex-col flex-wrap gap-6 content-center justify-center m-auto"
         >
           <img src={excelIcon} alt="excel icon" className="w-12 mx-auto" />
           <input
@@ -122,7 +122,7 @@ const Upload = () => {
             </div>
           ) : (
             <>
-              <p className="hidden sm:block text-gray-400">
+              <p className="hidden sm:block text-gray-400 text-center">
                 {" "}
                 Drop your excel sheet here or{" "}
                 <button
@@ -132,7 +132,7 @@ const Upload = () => {
                   browse
                 </button>{" "}
               </p>
-              <p className="sm:hidden text-gray-400">
+              <p className="sm:hidden text-gray-400 text-center">
                 {" "}
                 Upload your excel sheet{" "}
                 <button
