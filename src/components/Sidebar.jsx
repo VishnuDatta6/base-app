@@ -14,7 +14,7 @@ const Sidebar = ({isOpen, setIsOpen}) => {
       <div className="flex justify-between gap-6 items-center m-6">
         <div className="sb-heading flex items-center gap-4 sm:mx-10">
         <img src={logomini} alt="logo" className="w-10 sm:w-16"/>
-        <span className="font-nunito font-semibold text-xl text-gray-350 sm:text-2xl">Base</span>
+        <span className="font-nunito font-semibold text-xl sm:text-2xl">Base</span>
         </div>
         <button className="sm:hidden text-3xl mx-4" onClick={()=>setIsOpen(false)}>&times;</button>
       </div>

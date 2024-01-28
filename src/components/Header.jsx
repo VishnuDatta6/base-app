@@ -33,7 +33,7 @@ const Header = ({setIsOpen}) => {
         <img src={logomini} alt="logo" className="w-10"/>
         <span>Base</span>
       </div>
-      <div className="flex items-center gap-8 mx-14 relative">
+      <div className="flex items-center gap-8 mx-5 sm:mx-10 relative">
         <img src={notification} alt="notification" />
         <button className="" onClick={()=>setPop(true)}>
         <img className="rounded-full w-10" src={userIcon} alt="user icon" />
