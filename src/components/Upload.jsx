@@ -92,7 +92,7 @@ const Upload = () => {
   return (
     <section className="h-full">
       <div className="sm:h-1/2 sm:p-12">
-        <h1 className="w-96 mx-auto py-8 font-semibold sm:hidden">
+        <h1 className="w-4/5 mx-auto py-8 font-semibold sm:hidden">
           Upload CSV
         </h1>
         <div
@@ -146,7 +146,7 @@ const Upload = () => {
           )}
         </div>
         <button
-          className={`sm:w-1/2 w-96 sm:h-24 h-14 flex flex-wrap content-center justify-center mx-auto my-6 bg-primary ${data?.length ? 'opacity-40' : ''} font-semibold text-white border-none rounded-2xl`}
+          className={`sm:w-1/2 w-4/5 sm:h-24 h-14 flex flex-wrap content-center justify-center mx-auto my-6 bg-primary ${data?.length ? 'opacity-40' : ''} font-semibold text-white border-none rounded-2xl`}
           onClick={handleFileUpload}
           disabled={data?.length}
         >
