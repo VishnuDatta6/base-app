@@ -9,7 +9,7 @@ function App() {
   const {setUsername} = useContext(conText);
 
   useEffect(()=>{
-    if(sessionStorage.getItem("logged")){
+    if(localStorage.getItem("logged")){
       setUsername(true);
     }
     // eslint-disable-next-line

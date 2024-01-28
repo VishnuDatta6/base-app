@@ -17,7 +17,7 @@ const Signin = () => {
 
   const handleSignIn = () => {
     if(creds.email && creds.password){
-      sessionStorage.setItem("logged", "true");
+      localStorage.setItem("logged", "true");
       setUsername(true);
       navigate("/upload", {replace: true})
     }else{

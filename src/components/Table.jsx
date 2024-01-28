@@ -1,7 +1,7 @@
 import React from "react";
 import { storedTagList } from "../utils/utilities";
 
-const Table = ({ data, setData }) => {
+const Table = ({ data, setData, setDoneStat }) => {
   const tagcolumnList = data.map((item) => item["select tags"]);
 
   const tagListBuilder = (arr) => {
@@ -37,6 +37,7 @@ const Table = ({ data, setData }) => {
         return item;
       });
     });
+    setDoneStat(true);
   };
 
   const handleTagDeletion = (id, tagToDelete) => [

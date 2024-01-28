@@ -5,9 +5,11 @@ import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Upload from "./Upload";
 import { conText } from "./context/centralState";
+import Dashboard from "./Dashboard";
 
 const Router = () => {
   const { username } = useContext(conText);
+    
   return (
     <Routes>
       <Route
@@ -15,6 +17,7 @@ const Router = () => {
         element={username ? <DashboardLayout /> : <Navigate to="/login" />}
       >
         <Route path="/" element={<Navigate to="/upload" />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/upload" element={<Upload />} />
       </Route>
       <Route path="/" element={<MainLayout />}>

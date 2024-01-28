@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import logomini from "../assets/logo-mini.svg";
 import { navs } from "../utils/navs";
 import "../scss/sidebar.scss";
@@ -6,8 +6,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = ({isOpen, setIsOpen}) => {
   const {pathname} = useLocation();
-  const [clickedNav, setClickedNav] = useState("");
-  console.log(clickedNav);
 
   return (
     <section id="sidebar" className={`${isOpen ? 'w-2/3' : 'w-0'} h-dvh duration-300 ease-in overflow-hidden sm:w-1/6 sm:block rounded-r-3xl z-20 fixed bg-white`}>
@@ -26,7 +24,7 @@ const Sidebar = ({isOpen, setIsOpen}) => {
               key={index}
               data-index={index}
               className={`font-nunito font-semibold text-lg flex w-full px-10 gap-6 items-center ${pathname === path ? 'activenav' : ''}`}
-              onClick={()=>setClickedNav(title)}
+              onClick={()=>sessionStorage.setItem("lastvisited",path)}
             >
               <div className="w-10">{icon}</div>
               {title}

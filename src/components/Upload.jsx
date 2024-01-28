@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import excelIcon from "../assets/excel-icon.svg";
 import uploadIcon from "../assets/upload-icon.svg";
 import * as XLSX from "xlsx";
@@ -11,6 +11,7 @@ const Upload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
+  const [doneStat, setDoneStat] = useState(false);
 
   const handleDrop = (event) => {
     event.preventDefault();
@@ -52,16 +53,19 @@ const Upload = () => {
           const worksheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[worksheetName];
           const res = XLSX.utils.sheet_to_json(worksheet);
-          if(res.length>0){
-            if(Object.keys(res[0]).join("") === "idlinksprefixselect tagsselected tags"){
+          if (res.length > 0) {
+            if (
+              Object.keys(res[0]).join("") ===
+              "idlinksprefixselect tagsselected tags"
+            ) {
               setData(res);
-            }else{
+              sessionStorage.setItem("uploaded", JSON.stringify(res));
+            } else {
               alert("File schema is not matched");
             }
-          }else {
+          } else {
             alert("Uploaded file is empty");
           }
-          
         };
       }
       if (selectedFile.type === "text/csv") {
@@ -69,14 +73,18 @@ const Upload = () => {
           header: true,
           skipEmptyLines: true,
           complete: function (result) {
-            const res = result?.data
-            if(result?.data.length > 0){
-              if(Object.keys(res[0]).join("") === "idlinksprefixselect tagsselected tags"){
+            const res = result?.data;
+            if (result?.data.length > 0) {
+              if (
+                Object.keys(res[0]).join("") ===
+                "idlinksprefixselect tagsselected tags"
+              ) {
                 setData(result.data);
-              }else{
+                sessionStorage.setItem("uploaded", JSON.stringify(result.data));
+              } else {
                 alert("File schema is not matched");
               }
-            }else {
+            } else {
               alert("Uploaded file is empty");
             }
           },
@@ -88,6 +96,23 @@ const Upload = () => {
       alert("Please choose a file to upload");
     }
   };
+
+  const handleSave = () => {
+    localStorage.setItem("saved", JSON.stringify(data));
+    sessionStorage.removeItem("uploaded");
+    setData(null);
+    setDoneStat(false);
+  };
+
+  useEffect(() => {
+    const sessionStorageKey = "uploaded";
+    const storedData = sessionStorage.getItem(sessionStorageKey);
+
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setData(parsedData);
+    }
+  }, []);
 
   return (
     <section className="h-full">
@@ -146,7 +171,9 @@ const Upload = () => {
           )}
         </div>
         <button
-          className={`sm:w-1/2 w-4/5 sm:h-24 h-14 flex flex-wrap content-center justify-center mx-auto my-6 bg-primary ${data?.length ? 'opacity-40' : ''} font-semibold text-white border-none rounded-2xl`}
+          className={`sm:w-1/2 w-4/5 sm:h-24 h-14 flex flex-wrap content-center justify-center mx-auto my-6 bg-primary ${
+            data?.length ? "opacity-40" : ""
+          } font-semibold text-white border-none rounded-2xl`}
           onClick={handleFileUpload}
           disabled={data?.length}
         >
@@ -162,11 +189,22 @@ const Upload = () => {
       </div>
       {data ? (
         <div className="">
-          <h2 className="sm:w-11/12 mx-4 mt-14 mb-4 sm:m-4 font-semibold text-base sm:text-5xl sm:mx-auto sm:my-10 ">
-            Uploads
-          </h2>
+          <div className="w-4/5 sm:w-11/12 flex justify-between mx-auto items-center">
+            <h2 className="w-6 my-9 font-figtree font-semibold text-base sm:text-5xl sm:my-10 ">
+              Uploads
+            </h2>
+            <button
+              disabled={!doneStat}
+              onClick={handleSave}
+              className={`bg-primary text-white font-figtree font-semibold text-base rounded-xl p-4 ${
+                !doneStat ? "opacity-40" : ""
+              }`}
+            >
+              Save
+            </button>
+          </div>
           <div className="w-screen sm:w-11/12 sm:mx-auto overflow-x-scroll">
-          <Table data={data} setData={setData} />
+            <Table data={data} setData={setData} setDoneStat={setDoneStat} />
           </div>
         </div>
       ) : null}

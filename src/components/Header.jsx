@@ -4,14 +4,18 @@ import userIcon from "../assets/v-image.png";
 import logomini from "../assets/logo-mini.svg";
 import hamburger from "../assets/hamburger.svg";
 import { conText } from "./context/centralState";
+import { useLocation } from "react-router-dom";
 
 const Header = ({setIsOpen}) => {
   const [pop, setPop] = useState(false);
   const {setUsername} = useContext(conText);
+  const {pathname} = useLocation();
 
   const handleLogout = ()=>{
-    sessionStorage.removeItem("logged");
+    localStorage.removeItem("logged");
     setUsername(false);
+    sessionStorage.removeItem("uploaded");
+    sessionStorage.removeItem("lastvisited");
   }
 
   const renderPopover = ()=>{
@@ -25,7 +29,7 @@ const Header = ({setIsOpen}) => {
 
   return (
     <section className="sm:w-5/6 w-full z-20 h-24 flex items-center justify-between float-right" onMouseLeave={()=>setPop(false)}>
-      <div className="hidden sm:block font-semibold font-figtree text-2xl">Upload CSV</div>
+      <div className="hidden sm:block font-semibold font-figtree text-2xl">{pathname === '/upload' ?'Upload CSV' : 'Dashboard'}</div>
       <div id='mobileheader' className="flex items-center mx-7 gap-6 sm:hidden">
         <button onClick={()=>setIsOpen(true)}>
         <img src={hamburger} alt="hamburger menu icon" className="w-8"/>

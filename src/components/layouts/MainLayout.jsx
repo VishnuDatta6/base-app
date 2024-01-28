@@ -4,7 +4,9 @@ import { conText } from "../context/centralState";
 
 const MainLayout = () => {
   const {username} = useContext(conText);
-  return <div>{username ? <Navigate to="/upload" /> : <Outlet />}</div>;
+  const storedPath = sessionStorage.getItem("lastvisited");
+
+  return <div>{username ? <Navigate to={storedPath ? storedPath : "/upload" } /> : <Outlet />}</div>;
 };
 
 export default MainLayout;

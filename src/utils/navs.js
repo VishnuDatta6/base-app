@@ -17,7 +17,7 @@ export const navs = [
       </svg>
     ),
     title: "Dashboard",
-    path: "/",
+    path: "/dashboard",
   },
   {
     icon: (
