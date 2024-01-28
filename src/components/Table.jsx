@@ -1,5 +1,4 @@
 import React from "react";
-import "../scss/table.scss";
 import { storedTagList } from "../utils/utilities";
 
 const Table = ({ data, setData }) => {
@@ -105,7 +104,9 @@ const Table = ({ data, setData }) => {
                 </select>
               </td>
               <td className="bg-white min-h-24 flex flex-wrap p-4 rounded-lg">
-                {item["selected tags"]?.split(",").map((tag) => {
+                {
+                //eslint-disable-next-line
+                item["selected tags"]?.split(",").map((tag) => {
                   if (tag) {
                     return (
                       <span key={tag} className="bg-primary w-26 font-semibold flex items-center rounded-lg text-white gap-2 px-4 m-2 ">
