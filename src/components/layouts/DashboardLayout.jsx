@@ -11,7 +11,7 @@ const DashboardLayout = () => {
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 z-10"
+          className="fixed inset-0 bg-black sm:bg-transparent opacity-50 z-10"
           onClick={() => setIsOpen(false)}
         />
       )}

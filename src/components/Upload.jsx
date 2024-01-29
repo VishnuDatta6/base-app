@@ -20,8 +20,6 @@ const Upload = () => {
   };
 
   const handleFileInput = (event) => {
-    event.preventDefault();
-
     const file = event.dataTransfer?.files[0] || event.target.files[0];
     if (file) {
       if (
@@ -92,6 +90,7 @@ const Upload = () => {
       }
       setLoading(false);
       setSelectedFile(null);
+      inputFileRef.current.value = ""
     } else {
       alert("Please choose a file to upload");
     }
@@ -139,7 +138,10 @@ const Upload = () => {
             <div className="flex flex-col gap-4 text-center">
               <p className="text-gray-400">{selectedFile.name}</p>
               <button
-                onClick={() => setSelectedFile(null)}
+                onClick={() => {
+                  setSelectedFile(null);
+                  inputFileRef.current.value = "";
+                }}
                 className="text-red-600"
               >
                 Remove
